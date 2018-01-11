@@ -111,7 +111,9 @@ export function loadCollectArticles() {
 在严格模式下，无论何时发生了状态变更且不是由 mutation 函数引起的，将会抛出错误。这能保证所有的状态变更都能被调试工具跟踪到。
 
 而插件createLogger是日志插件用于调试，主要是mutaions的操作调试
+
 ![](https://github.com/hangxing620/ActionDemo/blob/master/images/demo1.png)
+
 ```javascript
 // index.js
 // 判断当前环境是开发环境还是生产环境
@@ -128,3 +130,21 @@ export default new Vuex.Store({
   plugins: debug ? [createLogger()] : []
 })
 ```
+
+使用mapGetters来获取state派生出来的状态，来获取收藏列表的文章
+
+```javascript
+// HelloWrold.vue
+...
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+...
+
+computed: {
+  ...mapGetters([
+    'articles'
+  ])
+}
+
+```
+
+因为保存收藏的文章的进度，我们不知道
