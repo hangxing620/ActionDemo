@@ -61,6 +61,21 @@ computed: {
 
 ## 项目例子讲解
 
+##### 启动一个REST的api
+
+使用[json-server](https://github.com/typicode/json-server)，启动一个REST的api
+
+```
+$ npm install -g json-server
+```
+
+开始Json Server
+
+```
+$ json-server --watch db.json
+```
+
+
 
 数据源里面的属性有收藏的文章列表和文章对象
 
@@ -89,4 +104,27 @@ export function loadCollectArticles() {
   return storage.get(COLLECT_KEY, [])
 }
 
+```
+
+这是vuex的Store的相关配置，其中的[strict](https://vuex.vuejs.org/zh-cn/strict.html)是严格模式
+
+在严格模式下，无论何时发生了状态变更且不是由 mutation 函数引起的，将会抛出错误。这能保证所有的状态变更都能被调试工具跟踪到。
+
+而插件createLogger是日志插件用于调试，主要是mutaions的操作调试
+![](https://github.com/hangxing620/ActionDemo/blob/master/images/demo1.png)
+```javascript
+// index.js
+// 判断当前环境是开发环境还是生产环境
+...
+import createLogger from 'vuex/dist/logger'
+const debug = process.env.NODE_ENV !== 'production'
+
+export default new Vuex.Store({
+  state,
+  getters,
+  actions,
+  mutations,
+  strict: debug,
+  plugins: debug ? [createLogger()] : []
+})
 ```
