@@ -147,4 +147,16 @@ computed: {
 
 ```
 
-因为保存收藏的文章的进度，我们不知道
+因为保存收藏的文章的进度，我们不知道，所以不用MapMutations（同步），用mapActions来保存收藏文章的进度
+
+```javascript
+// HelloWorld.vue
+...
+methods: {
+    ...mapActions([
+      'saveArticle'
+    ])
+}
+...
+
+```
